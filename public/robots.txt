@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://relax-zone-online-b26f7798.zappy5.app/sitemap.xml

@@ -1,0 +1,86 @@
+# Relax-Zone.Online — Generative Engine Optimization Map
+
+> A מסחר אלקטרוני business.
+
+---
+
+## Pages
+
+### בית
+https://relax-zone-online-b26f7798.zappy5.app
+
+### אודות
+https://relax-zone-online-b26f7798.zappy5.app/about
+
+### צור קשר
+https://relax-zone-online-b26f7798.zappy5.app/contact
+
+### Products
+https://relax-zone-online-b26f7798.zappy5.app/products
+המוצרים שלנו - Relax-Zone.Online
+
+### Cart
+https://relax-zone-online-b26f7798.zappy5.app/cart
+עגלת הקניות שלך
+
+### Checkout
+https://relax-zone-online-b26f7798.zappy5.app/checkout
+תשלום
+
+### Login
+https://relax-zone-online-b26f7798.zappy5.app/login
+התחברות לקוחות
+
+### Account
+https://relax-zone-online-b26f7798.zappy5.app/account
+החשבון שלי
+
+### Order Success
+https://relax-zone-online-b26f7798.zappy5.app/order-success
+תודה על ההזמנה
+
+### Product Detail
+https://relax-zone-online-b26f7798.zappy5.app/product/:slug
+פרטי המוצר - Relax-Zone.Online
+
+### Category
+https://relax-zone-online-b26f7798.zappy5.app/category/:slug
+מוצרים - Relax-Zone.Online
+
+## Legal & Policy
+
+### Privacy Policy
+https://relax-zone-online-b26f7798.zappy5.app/privacy
+Information about how user data is collected, stored, and protected.
+
+### Terms & Conditions
+https://relax-zone-online-b26f7798.zappy5.app/terms
+Legal terms describing service usage, rights, and policies.
+
+### Accessibility Statement
+https://relax-zone-online-b26f7798.zappy5.app/accessibility
+Information about WCAG compliance and accessibility features.
+
+---
+
+# Business Context (for LLM understanding)
+
+## About Relax-Zone.Online
+Relax-Zone.Online is a business in the מסחר אלקטרוני industry.
+
+## Target Audience
+- חובבי הפגת מתחים
+- מכורי קניות אונליין
+- צרכנים ידידותיים לסביבה
+- קוני מתנות
+- חובבי טיפוח עצמי
+
+## Industry
+מסחר אלקטרוני
+
+---
+
+# Additional Resources
+
+- **Sitemap**: https://relax-zone-online-b26f7798.zappy5.app/sitemap.xml
+- **Robots.txt**: https://relax-zone-online-b26f7798.zappy5.app/robots.txt

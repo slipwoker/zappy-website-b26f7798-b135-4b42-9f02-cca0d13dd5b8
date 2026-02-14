@@ -1,0 +1,683 @@
+<!DOCTYPE html><html lang="he" dir="rtl" data-zappy-site-type="ecommerce"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relax-Zone.Online | מכירת מוצרים</title>
+  <meta name="description" content="בית - Relax-Zone.Online provides professional מסחר אלקטרוני services. Specializing in מכירת מוצרים.">
+  <meta name="keywords" content="מכירת מוצרים, מוצרים להפגת מתחים אונליין, מתנות לטיפוח עצמי ישראל, קניות אונליין ידידותיות לסביבה">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="Relax-Zone.Online | מכירת מוצרים">
+  <meta property="og:description" content="בית - Relax-Zone.Online provides professional מסחר אלקטרוני services. Specializing in מכירת מוצרים.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Relax-Zone.Online | מכירת מוצרים">
+  <meta name="twitter:description" content="בית - Relax-Zone.Online provides professional מסחר אלקטרוני services. Specializing in מכירת מוצרים.">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+<!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: 'b26f7798-b135-4b42-9f02-cca0d13dd5b8',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; background: transparent !important; border: none !important; cursor: pointer !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-search-panel" id="mobile-search-panel">
+      <div class="search-wrapper">
+        <input type="text" id="mobile-search-input" placeholder="חיפוש מוצרים..." autocomplete="off">
+        <button class="search-submit" id="mobile-search-submit" title="חיפוש">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <button class="close-search" id="close-mobile-search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="search-results" id="mobile-search-results"></div>
+    </div>
+  
+<script>window.ZAPPY_WEBSITE_ID = "b26f7798-b135-4b42-9f02-cca0d13dd5b8";window.ZAPPY_API_BASE = (window.location.pathname.includes('/preview') ? "https://api.zappy5.com" : "https://api.zappy5.com");</script>
+  <nav class="navbar" dir="rtl">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+  
+  <button class="phone-header-btn" aria-label="Call">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+  
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/relax-zone-online-logo.webp" alt="Relax-Zone.Online" class="logo" />
+      </a>
+    </div>
+    
+    <ul class="nav-menu" id="navMenu">
+
+    <li class="menu-item-has-children zappy-products-dropdown">
+      <a href="/products">
+        סקירת קטלוג
+        
+        <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </a>
+      <ul class="sub-menu" id="zappy-nav-category-links">
+        <li><a href="/products">כל המוצרים</a></li>
+        <!-- Categories will be loaded dynamically -->
+      </ul>
+    </li>
+  <li><a href="/about">אודות</a></li><li><a href="/contact">צור קשר</a></li></ul><div class="nav-ecommerce-icons nav-icons-left"><a href="/login" class="login-link nav-login" title="התחברות"><svg class="login-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a><a href="#cart" class="cart-link nav-cart" id="cart-drawer-toggle" title="עגלת קניות"><svg class="cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span class="cart-count">0</span></a><div class="nav-search-box">
+    <input type="text" class="nav-search-input" id="nav-search-input" placeholder="חיפוש מוצרים..." autocomplete="off">
+    <button class="nav-search-btn" id="nav-search-btn" title="חיפוש">
+      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    </button>
+    <div class="nav-search-results" id="nav-search-results"></div>
+  </div></div><div class="nav-ecommerce-icons nav-icons-right"><button class="nav-search-toggle" id="mobile-search-toggle" title="חיפוש"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button></div>
+    
+    
+  </div>
+</nav>
+
+    <nav class="zappy-catalog-menu rtl" id="zappy-catalog-menu" dir="rtl">
+      <div class="catalog-menu-container">
+        <a href="/products" class="catalog-menu-item catalog-menu-all">כל המוצרים</a>
+        <div class="catalog-menu-categories" id="zappy-category-links">
+          <!-- Categories will be loaded dynamically -->
+        </div>
+      </div>
+    </nav>
+  
+  
+  <main>
+    <section class="home-hero-section" data-layout-spec="בית-hero" data-hero-type="fullscreen-card">
+  <!-- Full-bleed background image -->
+  <img data-hero-bg="true" data-placeholder="home-hero-bg" data-context="Bright, airy e-commerce lifestyle scene with clean white/cream background, natural daylight, organized product display shelves or modern minimalist shopping environment, soft focus creating calm trustworthy atmosphere, plenty of negative space in upper-right area for text overlay, professional commercial photography style" class="home-hero-bg" width="1920" height="1080" src="/assets/site-home-hero-bg.webp" alt="רקע אזור הרגיעה - חוויית קניות מרגיעה ואמינה">
+  
+  <!-- Scrim overlay for text legibility -->
+  <div class="home-hero-scrim"></div>
+  
+  <!-- Text overlay card (frosted glass) -->
+  <div class="home-hero-content">
+    <div class="home-hero-card">
+      <h1>חוויית קניות מרגיעה ואמינה</h1>
+      <h3>בחירה ברורה, מוצרים אמינים והחלטות רכישה בטוחות – הכל במקום אחד</h3>
+      <div class="home-hero-cta-row">
+        <a href="#contact" class="btn-primary home-hero-btn-primary">צור קשר</a>
+        <a href="#categories" class="btn-ghost home-hero-btn-secondary">צפה בקטגוריות</a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bottom divider: soft curved SVG transition -->
+  <div class="home-hero-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="home-hero-divider-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:rgba(251,249,245,0);stop-opacity:1"></stop>
+          <stop offset="100%" style="stop-color:#FBF9F5;stop-opacity:1"></stop>
+        </linearGradient>
+      </defs>
+      <path d="M0,80 L0,40 Q150,35 300,40 T600,38 Q750,42 900,38 T1200,40 L1200,80 Z" fill="url(#home-hero-divider-gradient)"></path>
+    </svg>
+  </div>
+</section>
+
+    <section class="featured-products-section" id="featured-products" data-zappy-dynamic="true">
+      <div class="container">
+        <h2 class="section-title">מוצרים מומלצים</h2>
+        <div class="product-grid featured-grid" id="zappy-featured-products">
+          <div class="loading-products">טוען מוצרים...</div>
+        </div>
+        <div class="view-all-products">
+          <a href="/products" class="btn btn-primary">צפה בכל המוצרים →</a>
+        </div>
+      </div>
+    </section>
+  
+
+    <section class="featured-categories-section" id="featured-categories" data-zappy-dynamic="true">
+      <div class="container">
+        <h2 class="section-title">קנו לפי קטגוריה</h2>
+        <div class="category-blocks" id="zappy-featured-categories">
+          <div class="loading-categories">טוען מוצרים...</div>
+        </div>
+      </div>
+    </section>
+  
+
+<section class="home-categories-section" data-layout-spec="בית-categories">
+  <div class="home-categories-container">
+    <div class="home-categories-intro">
+      <h2>גלו את המגוון לפי קטגוריות</h2>
+      <p>קטגוריות מסודרות שעוזרות לכם למצוא במהירות בדיוק מה שמתאים לצרכים שלכם.</p>
+    </div>
+    
+    <div class="home-categories-grid">
+      <article class="home-category-card card-category-card card-hoverLift">
+        <div class="home-category-image-wrapper">
+          <img data-placeholder="home-categories-image-1" data-context="מוצרי טיפוח יומיומיים ואיכותיים לחנות מסחר אלקטרוני, צילום אור טבעי עם משטחים נקיים, בקבוקי קרם וסבונים על משטח שיש לבן" width="600" height="600" src="/assets/site-home-categories-image-1.webp" alt="מוצרי טיפוח יומיומיים">
+        </div>
+        <div class="home-category-content">
+          <h3>טיפוח יומיומי</h3>
+          <p>מוצרי טיפוח איכותיים לשגרה היומית שלכם.</p>
+        </div>
+      </article>
+
+      <article class="home-category-card card-category-card card-hoverLift">
+        <div class="home-category-image-wrapper">
+          <img data-placeholder="home-categories-image-2" data-context="אביזרים לבית ושדרוגים עיצוביים לחנות מסחר אלקטרוני, צילום מינימליסטי עם אור טבעי, כריות נוי וכלי קרמיקה על רקע בהיר" width="600" height="600" src="/assets/site-home-categories-image-2.webp" alt="שדרוגים לבית">
+        </div>
+        <div class="home-category-content">
+          <h3>שדרוגים לבית</h3>
+          <p>פריטי עיצוב ואביזרים שמעניקים לבית מראה חדש.</p>
+        </div>
+      </article>
+
+      <article class="home-category-card card-category-card card-hoverLift">
+        <div class="home-category-image-wrapper">
+          <img data-placeholder="home-categories-image-3" data-context="מתנות מעוצבות ואריזות מתנה לחנות מסחר אלקטרוני, צילום נקי עם אור טבעי, קופסאות מתנה עם סרטים על רקע לבן" width="600" height="600" src="/assets/site-home-categories-image-3.webp" alt="מתנות מעוצבות">
+        </div>
+        <div class="home-category-content">
+          <h3>מתנות מעוצבות</h3>
+          <p>רעיונות למתנות מושלמות לכל אירוע ומועד.</p>
+        </div>
+      </article>
+
+      <article class="home-category-card card-category-card card-hoverLift">
+        <div class="home-category-image-wrapper">
+          <img data-placeholder="home-categories-image-4" data-context="מוצרי טיפוח אישי ובריאות לחנות מסחר אלקטרוני, צילום אור טבעי נקי, מברשות שיער וקרמים על משטח עץ בהיר" width="600" height="600" src="/assets/site-home-categories-image-4.webp" alt="טיפוח אישי">
+        </div>
+        <div class="home-category-content">
+          <h3>טיפוח אישי</h3>
+          <p>מוצרים לטיפול עצמי ורווחה אישית יומיומית.</p>
+        </div>
+      </article>
+
+      <article class="home-category-card card-category-card card-hoverLift">
+        <div class="home-category-image-wrapper">
+          <img data-placeholder="home-categories-image-5" data-context="אביזרים טכנולוגיים ואלקטרוניקה לחנות מסחר אלקטרוני, צילום מודרני נקי, אוזניות ומטענים על רקע מינימליסטי לבן" width="600" height="600" src="/assets/site-home-categories-image-5.webp" alt="אביזרים טכנולוגיים">
+        </div>
+        <div class="home-category-content">
+          <h3>אביזרים טכנולוגיים</h3>
+          <p>גאדג׳טים ואביזרים שמקלים על החיים הדיגיטליים.</p>
+        </div>
+      </article>
+
+      <article class="home-category-card card-category-card card-hoverLift">
+        <div class="home-category-image-wrapper">
+          <img data-placeholder="home-categories-image-6" data-context="מוצרי ארומתרפיה ונרות ריחניים לחנות מסחר אלקטרוני, צילום אור טבעי רך, נרות וקופסאות ריחניות על משטח שיש" width="600" height="600" src="/assets/site-home-categories-image-6.webp" alt="ארומתרפיה">
+        </div>
+        <div class="home-category-content">
+          <h3>ארומתרפיה</h3>
+          <p>ניחוחות מרגיעים שיוצרים אווירה נעימה בבית.</p>
+        </div>
+      </article>
+
+      <article class="home-category-card card-category-card card-hoverLift">
+        <div class="home-category-image-wrapper">
+          <img data-placeholder="home-categories-image-7" data-context="מוצרי יוגה ומדיטציה לחנות מסחר אלקטרוני, צילום מינימליסטי נקי, מזרני יוגה וכריות מדיטציה על רקע לבן" width="600" height="600" src="/assets/site-home-categories-image-7.webp" alt="יוגה ומדיטציה">
+        </div>
+        <div class="home-category-content">
+          <h3>יוגה ומדיטציה</h3>
+          <p>כלים ואביזרים לתרגול מיינדפולנס והרפיה.</p>
+        </div>
+      </article>
+
+      <article class="home-category-card card-category-card card-hoverLift">
+        <div class="home-category-image-wrapper">
+          <img data-placeholder="home-categories-image-8" data-context="מוצרים אקולוגיים וידידותיים לסביבה לחנות מסחר אלקטרוני, צילום אור טבעי, מוצרים בחומרים טבעיים על רקע לבן נקי" width="600" height="600" src="/assets/site-home-categories-image-8.webp" alt="מוצרים אקולוגיים">
+        </div>
+        <div class="home-category-content">
+          <h3>מוצרים אקולוגיים</h3>
+          <p>בחירות ידידותיות לסביבה לצריכה מודעת.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+  
+  <div class="home-categories-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,60 L0,30 Q100,25 200,32 T400,28 Q500,34 600,26 T800,32 Q900,28 1000,34 T1200,30 L1200,60 Z" stroke="#0F766E" stroke-width="2" fill="none"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="home-benefits-section" data-layout-spec="בית-benefits">
+  <div class="home-benefits-container">
+    <div class="home-benefits-header">
+      <h2>בנוי עבור החלטות בטוחות</h2>
+      <p>אנחנו מאמינים בבהירות, אמינות ותמיכה מלאה. כל פרט תוכנן כדי להעניק לך שקט נפשי בכל שלב.</p>
+    </div>
+
+    <div class="home-benefits-grid">
+      <div class="home-benefits-card">
+        <svg class="home-benefits-icon" data-element-type="icon" data-icon-type="svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 20L16 28L32 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          <circle cx="20" cy="20" r="15" stroke="currentColor" stroke-width="1.5"></circle>
+        </svg>
+        <h3>בהירות במשלוח</h3>
+        <p>כל המידע על המשלוח שלך זמין ונגיש. אנחנו שומרים אותך מעודכן בכל שלב, כדי שתוכל לתכנן בראש שקט.</p>
+      </div>
+
+      <div class="home-benefits-card">
+        <svg class="home-benefits-icon" data-element-type="icon" data-icon-type="svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 20C12 20 15 14 20 14C25 14 28 20 28 20C28 20 25 26 20 26C15 26 12 20 12 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          <circle cx="20" cy="20" r="3" stroke="currentColor" stroke-width="1.5"></circle>
+          <path d="M20 8V12M20 28V32M8 20H12M28 20H32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+        </svg>
+        <h3>החזרות פשוטות</h3>
+        <p>תהליך החזרה ברור וידידותי. אנחנו כאן כדי להקל עליך, עם הנחיות פשוטות ותמיכה מלאה לאורך כל הדרך.</p>
+      </div>
+
+      <div class="home-benefits-card">
+        <svg class="home-benefits-icon" data-element-type="icon" data-icon-type="svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 8C13.4 8 8 13.4 8 20C8 26.6 13.4 32 20 32C26.6 32 32 26.6 32 20C32 13.4 26.6 8 20 8Z" stroke="currentColor" stroke-width="1.5"></path>
+          <path d="M20 14V20L24 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <h3>תמיכה מהירה</h3>
+        <p>צוות התמיכה שלנו זמין כדי לענות על כל שאלה. אנחנו מחויבים למענה מהיר ולפתרון יעיל של כל נושא.</p>
+      </div>
+    </div>
+
+    <div class="home-benefits-stats">
+      <div class="home-benefits-stat-item">
+        <div class="home-benefits-stat-label">מבחר מוצרים מאושר</div>
+      </div>
+      <div class="home-benefits-stat-divider"></div>
+      <div class="home-benefits-stat-item">
+        <div class="home-benefits-stat-label">בדיקות איכות מקיפות</div>
+      </div>
+      <div class="home-benefits-stat-divider"></div>
+      <div class="home-benefits-stat-item">
+        <div class="home-benefits-stat-label">שביעות רצון לקוחות גבוהה</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-benefits-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="home-benefits-clip">
+          <path d="M0,0 L1200,0 L1200,80 L1100,80 L1080,60 L1060,80 L0,80 Z"></path>
+        </clipPath>
+      </defs>
+      <rect width="1200" height="80" fill="var(--bg-dark)" clip-path="url(#home-benefits-clip)"></rect>
+    </svg>
+  </div>
+</section>
+
+<section class="home-showcase-section" data-layout-spec="בית-showcase">
+  <div class="home-showcase-container">
+    <div class="home-showcase-content">
+      <h2>מבט מאורגן ומעוצב שנשאר מסודר</h2>
+      <p>אנחנו שומרים על מבחר מוצרים מעודכן ומהימן, כך שתוכלו למצוא בדיוק מה שאתם מחפשים בקלות ובביטחון. כל פריט נבחר בקפידה כדי להבטיח איכות ושקט נפשי.</p>
+      <div class="home-showcase-highlights">
+        <p class="home-showcase-highlight"><svg data-no-icon-edit="true" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="4" fill="currentColor"></circle></svg>אוספים מאורגנים בקפידה</p>
+        <p class="home-showcase-highlight"><svg data-no-icon-edit="true" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="4" fill="currentColor"></circle></svg>תיאורי מוצרים ברורים ומפורטים</p>
+        <p class="home-showcase-highlight"><svg data-no-icon-edit="true" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="4" fill="currentColor"></circle></svg>חוויית גלישה רגועה ונעימה</p>
+      </div>
+    </div>
+    <div class="home-showcase-imagery">
+      <div class="home-showcase-backplate"></div>
+      <div class="home-showcase-grid">
+        <div class="home-showcase-grid-item home-showcase-grid-item-1">
+          <img data-placeholder="home-showcase-image-1" data-context="A calming lifestyle product photo for an e-commerce wellness store - natural lighting, minimal styling, soft neutral tones, organic relaxation item like essential oil diffuser or natural candles on clean surface" width="300" height="300" src="/assets/site-home-showcase-image-1.webp" alt="מוצר להרגעה ראשון">
+        </div>
+        <div class="home-showcase-grid-item home-showcase-grid-item-2">
+          <img data-placeholder="home-showcase-image-2" data-context="A serene product display for wellness e-commerce - natural light photography, spa-like atmosphere, organic self-care products like herbal tea set or aromatherapy items arranged beautifully" width="300" height="300" src="/assets/site-home-showcase-image-2.webp" alt="מוצר להרגעה שני">
+        </div>
+        <div class="home-showcase-grid-item home-showcase-grid-item-3 home-showcase-grid-item-large">
+          <img data-placeholder="home-showcase-image-3" data-context="A focal lifestyle image for relaxation e-commerce - warm natural lighting, cozy atmosphere, person enjoying meditation cushion or relaxation space with plants, soft textures, peaceful mood" width="300" height="620" src="/assets/site-home-showcase-image-3.webp" alt="מוצר להרגעה מרכזי">
+        </div>
+        <div class="home-showcase-grid-item home-showcase-grid-item-4">
+          <img data-placeholder="home-showcase-image-4" data-context="A clean product shot for wellness store - bright natural light, minimalist composition, eco-friendly relaxation product like bamboo massage tools or natural sleep aids on neutral background" width="300" height="300" src="/assets/site-home-showcase-image-4.webp" alt="מוצר להרגעה רביעי">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="home-showcase-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,60 L0,35 Q30,32 60,36 T120,33 Q150,37 180,34 T240,36 Q270,33 300,37 T360,34 Q390,36 420,33 T480,37 Q510,34 540,36 T600,33 Q630,37 660,34 T720,36 Q750,33 780,37 T840,34 Q870,36 900,33 T960,37 Q990,34 1020,36 T1080,33 Q1110,37 1140,34 T1200,36 L1200,60 Z" fill="#FBF9F5"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="home-cta-section" data-layout-spec="בית-cta">
+  <div class="home-cta-container">
+    <div class="home-cta-card">
+      <h2 class="home-cta-title">מוכנים לדבר על מה שאתם צריכים?</h2>
+      <p class="home-cta-description">נשמח לעזור לכם למצוא את המוצרים המושלמים להפגת מתחים וטיפוח עצמי. יש לכם שאלות לגבי זמינות, המלצות או פרטים נוספים? צרו איתנו קשר ונחזור אליכם בהקדם.</p>
+      <a href="/contact" class="home-cta-button">צרו קשר</a>
+      <p class="home-cta-reassurance">אנחנו משיבים בדרך כלל תוך 24 שעות בימי עסקים</p>
+    </div>
+  </div>
+</section>
+  </main>
+  
+  <footer class="site-footer"><div class="footer-container"><div class="footer-grid"><div class="footer-column footer-about"><img src="/assets/relax-zone-online-logo.webp" alt="Relax-Zone.Online" class="logo" /><p class="footer-description">החנות המקוונת שלך לרגיעה ונוחות. מוצרים איכוtiים במחירים הוגנים עם משלוח מהיר לכל הארץ.</p></div><div class="footer-column footer-links"><h3 class="footer-title">קישורים מהירים</h3><ul class="footer-nav"><li><a href="/about">אודות</a></li><li><a href="/contact">צור קשר</a></li></ul></div><div class="footer-column footer-contact"><h3 class="footer-title">יצירת קשר</h3><ul class="contact-list"><li><i class="fas fa-envelope"></i><a href="mailto:[business_email]">[business_email]</a></li><li><i class="fas fa-phone"></i><a href="tel:[business_phone]">[business_phone]</a></li><li><a href="/"><i class="fas fa-map-marker-alt"></i><span>[business_address]</span></a></li></ul></div><div class="footer-column footer-social"><h3 class="footer-title">עקבו אחרינו</h3><div class="social-links"><a href="[facebook_handle]" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a><a href="[instagram_handle]" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a><a href="[whatsapp_handle]" aria-label="WhatsApp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a></div></div></div><div class="footer-bottom"><div class="footer-legal"><a href="/privacy">מדיניות פרטיות</a><span class="separator">|</span><a href="/terms">תנאים והגבלות</a><span class="separator">|</span>
+            <a href="/return-policy" aria-label="מדיניות החזרות">
+              מדיניות החזרות
+            </a><span class="separator">|</span><a href="/accessibility">הצהרת נגישות</a></div><div class="footer-copyright"><p>© 2026 Relax-Zone.Online. כל הזכויות שמורות.</p></div><div class="footer-attribution"><a href="https://zappy5.com" target="_blank" class="zappy-attribution">Generated by Zappy</a></div></div></div></footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <script src="/script.js"></script>
+
+    <div data-integration="accessibility:toolbar"></div>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+</body></html>
